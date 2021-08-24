@@ -21,9 +21,9 @@ ERROR3="Error, enter a valid storage Path for Backup Destination"
 
 ## print variables, uncomment for debugging
 # echo BACKUP_STORAGE_PATH 	 = $BACKUP_STORAGE_PATH
-# echo NUM_OF_RETAINED_BACKUPS	 = $NUM_OF_RETAINED_BACKUPS
-# echo BACKUP_FILE_NAME 	 = $BACKUP_FILE_NAME
-# echo BACKUP_FILE_LIST 	 = $BACKUP_FILE_LIST
+# echo NUM_OF_RETAINED_BACKUPS = $NUM_OF_RETAINED_BACKUPS
+# echo BACKUP_FILE_NAME 		 = $BACKUP_FILE_NAME
+# echo BACKUP_FILE_LIST 		 = $BACKUP_FILE_LIST
 # echo RM_BACKUP_LIST 	 	 = $RM_BACKUP_LIST
 
 ## test arguments
@@ -126,9 +126,11 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 	--exclude='./tank100' \
 	--exclude='./_Backup' \
 	-zcvf "$BACKUP_STORAGE_PATH/$BACKUP_FILE_NAME""_root_""`date +"%Y-%m-%d-%H%M"`".tgz .
-
+	
+	echo '\n'
 	cd $BACKUP_STORAGE_PATH
 	pwd 
+	echo '\n'
 
 	## Build a list of current backups
 	ls -1 |grep tgz |grep -i $BACKUP_FILE_NAME > $BACKUP_FILE_LIST
@@ -140,13 +142,18 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 	awk "{ if ( NR > $NUM_OF_RETAINED_BACKUPS ) print; }" | \
 	tac > $RM_BACKUP_LIST
 	cat  $RM_BACKUP_LIST
+	
+	echo '\n'
 
 	## Delete previous backups
 	if [ -f "$BACKUP_STORAGE_PATH/$RM_BACKUP_LIST" ]; then
 		echo "$BACKUP_STORAGE_PATH/$RM_BACKUP_LIST exists."
 		echo "About to delete backups older than $NUM_OF_RETAINED_BACKUPS backups"
+		
+		echo '\n'
+		
 		for f in $( cat $RM_BACKUP_LIST ) ; do 
-			echo "$f"
+			echo "$f" 
 			rm "$f"
 			done
 		echo "Done"
@@ -157,6 +164,8 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 		echo "$BACKUP_STORAGE_PATH/$RM_BACKUP_LIST does not exist."
 		exit 1
 	fi
+	
+	echo '\n'
 
 else
 	###  Control will jump here if $BACKUP_STORAGE_PATH does NOT exists ###
