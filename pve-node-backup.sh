@@ -6,6 +6,11 @@ BACKUP_STORAGE_PATH=${1%/}
 NUM_OF_RETAINED_BACKUPS=$2
 BACKUP_FILE_NAME=PVE-Backup-`hostname`-$3
 
+## To Manually override path and set and uncomment the following variables:
+# BACKUP_STORAGE_PATH=/mnt/Backup
+# NUM_OF_RETAINED_BACKUPS=6
+# BACKUP_FILE_NAME=PVE-Backup-`hostname`-weekly
+
 ERROR0="No Arguments passed"
 ERROR1="pease enter a backup path, then a number"
 ERROR2="Enter a number of backups to keep"
