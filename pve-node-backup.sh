@@ -1,10 +1,11 @@
 #!/bin/sh
 
 ## Variables
-RM_BACKUP_LIST=rm_backup_list.txt
 BACKUP_STORAGE_PATH=${1%/}
 NUM_OF_RETAINED_BACKUPS=$2
 BACKUP_FILE_NAME=PVE-Backup-`hostname`-$3
+BACKUP_FILE_LIST=$BACKUP_FILE_NAME"_list.txt"
+RM_BACKUP_LIST=$BACKUP_FILE_NAME"_rm_list.txt"
 
 ## To Manually override path and set and uncomment the following variables:
 # BACKUP_STORAGE_PATH=/mnt/Backup
@@ -14,6 +15,13 @@ BACKUP_FILE_NAME=PVE-Backup-`hostname`-$3
 ERROR0="No Arguments passed"
 ERROR1="pease enter a backup path, then a number"
 ERROR2="Enter a number of backups to keep"
+
+## print variables
+echo $BACKUP_STORAGE_PATH
+echo $NUM_OF_RETAINED_BACKUPS
+echo $BACKUP_FILE_NAME
+echo $BACKUP_FILE_LIST
+echo $RM_BACKUP_LIST
 
 ## check variables
 
@@ -79,9 +87,9 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
    cd $BACKUP_STORAGE_PATH
    pwd 
    
-   ls -1 |grep tgz |grep -i $BACKUP_FILE_NAME > backup_list.txt
+   ls -1 |grep tgz |grep -i $BACKUP_FILE_NAME > $BACKUP_FILE_LIST
    
-   cat backup_list.txt
+   cat $BACKUP_FILE_LIST
 
    # read -t 5 -p "waiting for 5 seconds only... then move to deleting old backups "
    
@@ -89,8 +97,9 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 
    # read -t 5 -p "waiting for 5 seconds only... CTRL +C to cancel"
 
-   cp backup_list.txt backup_list.txt_bak
-    tac backup_list.txt  | \
+   cp $BACKUP_FILE_LIST "`echo $BACKUP_FILE_LIST`"_bak
+   
+    tac $BACKUP_FILE_LIST  | \
 	awk "{ if ( NR > $NUM_OF_RETAINED_BACKUPS ) print; }" | \
 	tac > $RM_BACKUP_LIST
 	cat  $RM_BACKUP_LIST
@@ -99,10 +108,10 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 		   echo "$BACKUP_STORAGE_PATH/$RM_BACKUP_LIST exists."
 		   # read -t 5 -p "waiting for 5 seconds only... CTRL +C to cancel"
 		   
+		   # rm -f $(<`echo $RM_BACKUP_LIST`)
 		   for f in $( cat $RM_BACKUP_LIST ) ; do 
 		   rm "$f"
 		   done
-		   
 		  mv $RM_BACKUP_LIST "`echo $RM_BACKUP_LIST`"_bak
 
 	else 
@@ -114,3 +123,5 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
   echo "Error: ${BACKUP_STORAGE_PATH} not found. Can not continue."
   exit 1
 fi
+
+
