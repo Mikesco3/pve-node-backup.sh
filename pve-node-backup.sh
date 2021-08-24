@@ -28,15 +28,34 @@ echo $RM_BACKUP_LIST
 ## first if no arguments passed
 if [ "$#" -eq 0 ]
 then
+    echo "
+	This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+	
+	for questions or feedback check out: 
+	https://github.com/Mikesco3/pve-node-backup.sh
+	"
+	echo '\n'
+	
     echo "ERROR0" $ERROR0 ;
-	echo "  add: /path/to/backup followed a #(of backups to keep)" ;
-    echo "  for Example: ";
-	echo "              pve-node-backup.sh /mnt/ExtHD 3 ";
-	echo $'\n'
-    echo "optionally add a backup type as 3rd argument (eg daily, weekly, monthly)";
+	echo "  add: 
+	    1st argument: /path/to/backup, 
+		2nd argument: #(of backups to keep), 
+		3rd argument: (optional): backup type (manual, daily, weekly, monthly, etc)" ;
     echo "  for Example: ";
 	echo "              pve-node-backup.sh /mnt/ExtHD 3 weekly";
-    exit 1
+		
+	exit 1
 fi
 
 echo '\n'
@@ -126,4 +145,18 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
   exit 1
 fi
 
+## GPLv3 
+    # This program is free software: you can redistribute it and/or modify
+    # it under the terms of the GNU General Public License as published by
+    # the Free Software Foundation, either version 3 of the License, or
+    # (at your option) any later version.
 
+    # This program is distributed in the hope that it will be useful,
+    # but WITHOUT ANY WARRANTY; without even the implied warranty of
+    # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    # GNU General Public License for more details.
+
+    # You should have received a copy of the GNU General Public License
+    # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+## 20210824: Added gpl, made it ready for proxmox VE 7 and published on github 
