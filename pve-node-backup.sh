@@ -111,6 +111,9 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 	pwd
 	echo tar "$BACKUP_STORAGE_PATH/$BACKUP_FILE_NAME""_root_""`date +"%Y-%m-%d-%H%M"`".tgz .
 
+	## Be sure to add to the --exclude lines the path for 
+	## any other location that should NOT be included in the tar file
+	## for example the Destination folder for the backups.
 	tar \
 	--exclude='./dev' \
 	--exclude='./sys' \
