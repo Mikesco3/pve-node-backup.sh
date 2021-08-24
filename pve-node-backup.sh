@@ -20,11 +20,11 @@ ERROR2="Enter a number of backups to keep"
 ERROR3="Error, enter a valid storage Path for Backup Destination"
 
 ## print variables, uncomment for debugging
-echo BACKUP_STORAGE_PATH 	 = $BACKUP_STORAGE_PATH
-echo NUM_OF_RETAINED_BACKUPS = $NUM_OF_RETAINED_BACKUPS
-echo BACKUP_FILE_NAME 		 = $BACKUP_FILE_NAME
-echo BACKUP_FILE_LIST 		 = $BACKUP_FILE_LIST
-echo RM_BACKUP_LIST 	 	 = $RM_BACKUP_LIST
+# echo BACKUP_STORAGE_PATH 	 = $BACKUP_STORAGE_PATH
+# echo NUM_OF_RETAINED_BACKUPS = $NUM_OF_RETAINED_BACKUPS
+# echo BACKUP_FILE_NAME 		 = $BACKUP_FILE_NAME
+# echo BACKUP_FILE_LIST 		 = $BACKUP_FILE_LIST
+# echo RM_BACKUP_LIST 	 	 = $RM_BACKUP_LIST
 
 ## test arguments
 echo " Arguments passed:" ;
@@ -144,13 +144,18 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 	## Delete previous backups
 	if [ -f "$BACKUP_STORAGE_PATH/$RM_BACKUP_LIST" ]; then
 		echo "$BACKUP_STORAGE_PATH/$RM_BACKUP_LIST exists."
-		echo "About to delete backups older than $NUM_OF_RETAINED_BACKUPS backups"		 
+		echo "About to delete backups older than $NUM_OF_RETAINED_BACKUPS backups"
 		for f in $( cat $RM_BACKUP_LIST ) ; do 
+			echo "$f"
 			rm "$f"
 			done
+		echo "Done"
+		echo '\n'
+		## rename the list of backups just deleted
 		mv $RM_BACKUP_LIST "`echo $RM_BACKUP_LIST`"_bak
 	else 
 		echo "$BACKUP_STORAGE_PATH/$RM_BACKUP_LIST does not exist."
+		exit 1
 	fi
 
 else
