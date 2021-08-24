@@ -99,7 +99,9 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 		   echo "$BACKUP_STORAGE_PATH/$RM_BACKUP_LIST exists."
 		   # read -t 5 -p "waiting for 5 seconds only... CTRL +C to cancel"
 		   
-		   rm -f $(<$RM_BACKUP_LIST)
+		   for f in $( cat $RM_BACKUP_LIST ) ; do 
+		   rm "$f"
+		   done
 		   
 		  mv $RM_BACKUP_LIST "`echo $RM_BACKUP_LIST`"_bak
 
