@@ -35,7 +35,12 @@ echo "		argument 3:	$3" ;
 ## first Test if user provided any arguments
 if [ "$#" -eq 0 ]
 	then
-		echo "
+		echo "		
+		This script is for backing up the root folder of the linux filesystem
+		onto a tar file, while keeping a specified number of versions.
+		Originally written to backup the root of Proxmox VE (not necessairly the VM's)
+
+		Licensing:
 		This program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
 		the Free Software Foundation, either version 3 of the License, or
@@ -55,7 +60,7 @@ if [ "$#" -eq 0 ]
 		echo '\n'
 		
 		echo "ERROR0" $ERROR0 ;
-		echo "  add: 
+		echo "  usage, run followed by these arguments: 
 			1st argument: /path/to/backup, 
 			2nd argument: #(of backups to keep), 
 			3rd argument: (optional): backup type (manual, daily, weekly, monthly, etc)" ;
