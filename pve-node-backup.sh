@@ -78,6 +78,7 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
    --exclude='./tmp' \
    --exclude='./run' \
    --exclude='./var/log' \
+   --exclude='./var/spool' \
    --exclude='./var/lib/samba/private' \
    --exclude='./var/lib/lxcfs' \
    --exclude='./lost+found' \
