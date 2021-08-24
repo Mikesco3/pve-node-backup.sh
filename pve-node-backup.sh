@@ -21,9 +21,9 @@ ERROR3="Error, enter a valid storage Path for Backup Destination"
 
 ## print variables, uncomment for debugging
 # echo BACKUP_STORAGE_PATH 	 = $BACKUP_STORAGE_PATH
-# echo NUM_OF_RETAINED_BACKUPS = $NUM_OF_RETAINED_BACKUPS
-# echo BACKUP_FILE_NAME 		 = $BACKUP_FILE_NAME
-# echo BACKUP_FILE_LIST 		 = $BACKUP_FILE_LIST
+# echo NUM_OF_RETAINED_BACKUPS	 = $NUM_OF_RETAINED_BACKUPS
+# echo BACKUP_FILE_NAME 	 = $BACKUP_FILE_NAME
+# echo BACKUP_FILE_LIST 	 = $BACKUP_FILE_LIST
 # echo RM_BACKUP_LIST 	 	 = $RM_BACKUP_LIST
 
 ## test arguments
