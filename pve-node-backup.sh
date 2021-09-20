@@ -130,6 +130,7 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 	--exclude='./var/spool' \
 	--exclude='./var/lib/samba/private' \
 	--exclude='./var/lib/lxcfs' \
+	--exclude='./var/lib/vz' \
 	--exclude='./lost+found' \
 	--exclude='./tank100' \
 	--exclude='./_Backup' \
