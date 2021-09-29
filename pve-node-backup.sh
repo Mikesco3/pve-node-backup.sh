@@ -134,6 +134,10 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 	--exclude='./lost+found' \
 	--exclude='./tank100' \
 	--exclude='./_Backup' \
+	--exclude=${BACKUP_STORAGE_PATH} \
+	--exclude='*/dump/*' \
+	--exclude='*/template/iso/*' \
+	--exclude='*/template/cache/*' \
 	-zcvf "$BACKUP_STORAGE_PATH/$BACKUP_FILE_NAME""_root_""`date +"%Y-%m-%d-%H%M"`".tgz .
 	
 	echo '\n'
