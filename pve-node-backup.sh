@@ -61,7 +61,7 @@ if [ "$#" -eq 0 ]
 		
 		echo "ERROR0" $ERROR0 ;
 		echo "  usage, run followed by these arguments: 
-			1st argument: /path/to/backup, 
+			1st argument: /path/to/backupDestination, 
 			2nd argument: #(of backups to keep), 
 			3rd argument: (optional): backup type (manual, daily, weekly, monthly, etc)" ;
 		echo "  for Example: ";
