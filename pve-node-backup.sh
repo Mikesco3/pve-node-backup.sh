@@ -127,12 +127,17 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 	--exclude='./tmp' \
 	--exclude='./run' \
 	--exclude='./var/log' \
+	--exclude='./var/cache' \
 	--exclude='./var/spool' \
 	--exclude='./var/lib/samba/private' \
 	--exclude='./var/lib/lxcfs' \
 	--exclude='./var/lib/vz' \
+        --exclude='./rpool/data' \
 	--exclude='./lost+found' \
+	--exclude='./fast100' \
+	--exclude='./fast200' \
 	--exclude='./tank100' \
+        --exclude='./tank200' \
 	--exclude='./_Backup' \
 	--exclude=${BACKUP_STORAGE_PATH} \
 	--exclude='*/dump/*' \
