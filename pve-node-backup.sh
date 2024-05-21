@@ -139,6 +139,9 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 	--exclude='./tank100' \
         --exclude='./tank200' \
 	--exclude='./_Backup' \
+	--exclude='./_Shadows' \
+	--exclude='./_VMs' \
+	--exclude='./_PCS' \
 	--exclude=${BACKUP_STORAGE_PATH} \
 	--exclude='*/dump/*' \
 	--exclude='*/template/iso/*' \
