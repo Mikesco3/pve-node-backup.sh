@@ -1,6 +1,6 @@
 #!/bin/sh
 
-## last edit: 20210824
+## last edit: 20240805
 
 ## Variables
 BACKUP_STORAGE_PATH=${1%/}
@@ -61,7 +61,7 @@ if [ "$#" -eq 0 ]
 		
 		echo "ERROR0" $ERROR0 ;
 		echo "  usage, run followed by these arguments: 
-			1st argument: /path/to/backupDestination, 
+			1st argument: /path/to/backup Destination, 
 			2nd argument: #(of backups to keep), 
 			3rd argument: (optional): backup type (manual, daily, weekly, monthly, etc)" ;
 		echo "  for Example: ";
@@ -120,33 +120,35 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 	## any other location that should NOT be included in the tar file
 	## for example the Destination folder for the backups.
 	tar \
-	--exclude='./dev' \
-	--exclude='./sys' \
-	--exclude='./proc' \
-	--exclude='./mnt' \
-	--exclude='./tmp' \
-	--exclude='./run' \
- 	--exclude='./usr/local/mesh_services/meshagent/DAIPC' \	
-	--exclude='./var/log' \
-	--exclude='./var/cache' \
-	--exclude='./var/spool' \
-	--exclude='./var/lib/samba/private' \
-	--exclude='./var/lib/lxcfs' \
-	--exclude='./var/lib/vz' \
-        --exclude='./rpool/data' \
-	--exclude='./lost+found' \
-	--exclude='./fast100' \
-	--exclude='./fast200' \
-	--exclude='./tank100' \
-        --exclude='./tank200' \
-	--exclude='./_Backup' \
-	--exclude='./_Shadows' \
-	--exclude='./_VMs' \
-	--exclude='./_PCS' \
-	--exclude=${BACKUP_STORAGE_PATH} \
-	--exclude='*/dump/*' \
-	--exclude='*/template/iso/*' \
-	--exclude='*/template/cache/*' \
+	  --exclude=${BACKUP_STORAGE_PATH} \
+	  --exclude='./_Backup' \
+	  --exclude='./_PCS' \
+	  --exclude='./_Shadows' \
+	  --exclude='./_VMs' \
+	  --exclude='./fast100' \
+	  --exclude='./fast200' \
+	  --exclude='./tank100' \
+	  --exclude='./tank200' \
+	  --exclude='./dev' \
+	  --exclude='./lost+found' \
+	  --exclude='./mnt' \
+	  --exclude='./proc' \
+	  --exclude='./rpool' \
+	  --exclude='./rpool/data' \
+	  --exclude='./run' \
+	  --exclude='./storage' \
+	  --exclude='./sys' \
+	  --exclude='./tmp' \
+	  --exclude='./usr/local/mesh_services/meshagent/DAIPC' \
+	  --exclude='./var/cache' \
+	  --exclude='./var/lib/lxcfs' \
+	  --exclude='./var/lib/samba/private' \
+	  --exclude='./var/lib/vz' \
+	  --exclude='./var/log' \
+	  --exclude='./var/spool' \
+	  --exclude='*/dump/*' \
+	  --exclude='*/template/cache/*' \
+	  --exclude='*/template/iso/*' \
 	-zcvf "$BACKUP_STORAGE_PATH/$BACKUP_FILE_NAME""_root_""`date +"%Y-%m-%d-%H%M"`".tgz .
 	
 	echo '\n'
@@ -193,7 +195,7 @@ else
 	###  Control will jump here if $BACKUP_STORAGE_PATH does NOT exists ###
 	echo $ERROR3 
 	echo "Error: ${BACKUP_STORAGE_PATH} not found. Can not continue."
-	exit 1
+	exit 1	
 fi
 ### END
 
@@ -213,4 +215,5 @@ fi
 	#
 ##
 	
+## 20240805: Sorted the exclude paths by custom and system by alphabetical order
 ## 20210824: Added gpl, made it ready for proxmox VE 7 and published on github 
