@@ -126,6 +126,7 @@ if [ -d "$BACKUP_STORAGE_PATH" ]; then
 	--exclude='./mnt' \
 	--exclude='./tmp' \
 	--exclude='./run' \
+ 	--exclude='./usr/local/mesh_services/meshagent/DAIPC' \	
 	--exclude='./var/log' \
 	--exclude='./var/cache' \
 	--exclude='./var/spool' \
